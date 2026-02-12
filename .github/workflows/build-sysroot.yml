@@ -1,0 +1,43 @@
+name: Build sysroot
+on: push
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Linux RISCV
+            base: linux-debian
+            arch: riscv64
+
+    name: Build ${{ matrix.name }} sysroot
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update system packages
+        run: sudo apt update
+
+      - name: Install Debootstrap
+        if: matrix.base == 'linux-debian'
+        run: sudo apt install debootstrap
+
+      - name: Build Debian root
+        if: matrix.base == 'linux-debian'
+        run: |
+          sudo apt install qemu-user-static
+          mkdir sysroot
+          sudo debootstrap --arch=${{ matrix.arch }} --foreign unstable sysroot https://deb.debian.org/debian
+          sudo chroot sysroot /debootstrap/debootstrap --second-stage
+          sudo chroot sysroot apt update
+          sudo chroot sysroot apt install -y libc6-dev libc++-dev libc++abi-dev libgcc-s1
+
+      - name: Pack sysroot
+        run: |
+          tar -cf sysroot.tar --exclude=sysroot/run --exclude=sysroot/media sysroot
+
+      - name: Upload sysroot
+        uses: actions/upload-artifact@v4
+        with:
+          name: sysroot-${{ matrix.base }}-${{ matrix.arch }}
+          path: sysroot.tar
+
