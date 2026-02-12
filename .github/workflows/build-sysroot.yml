@@ -28,7 +28,7 @@ jobs:
           - name: Linux S390X
             base: linux-debian
             arch: s390x
-            includes: sysroot/lib64
+            includes: ""
             tripple: systemz-linux-gnu
 
     name: Build ${{ matrix.name }} sysroot
