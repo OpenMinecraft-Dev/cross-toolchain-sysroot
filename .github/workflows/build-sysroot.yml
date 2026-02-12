@@ -21,7 +21,7 @@ jobs:
 
           - name: Linux PowerPC
             base: linux-debian
-            arch: ppc64
+            arch: ppc64el
             includes: ""
             tripple: ppc64-linux-gnu
 
