@@ -37,7 +37,7 @@ jobs:
 
       - name: Pack sysroot
         run: |
-          sudo tar -cf sysroot.tar sysroot/usr sysroot/bin sysroot/lib sysroot/sbin
+          sudo tar -cf sysroot.tar sysroot/usr sysroot/bin sysroot/lib sysroot/sbin sysroot/lib64
 
       - name: Upload sysroot
         uses: actions/upload-artifact@v4
