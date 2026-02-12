@@ -21,9 +21,9 @@ jobs:
 
           - name: Linux PowerPC
             base: linux-debian
-            arch: ppc64le
+            arch: ppc64
             includes: ""
-            tripple: ppc64le-linux-gnu
+            tripple: ppc64-linux-gnu
 
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
