@@ -25,11 +25,11 @@ jobs:
             includes: ""
             tripple: ppc64-linux-gnu
 
-          - name: Linux Sparc64
+          - name: Linux LoongArch32
             base: linux-debian
-            arch: sparc
+            arch: loong32
             includes: ""
-            tripple: sparcv9-linux-gnu
+            tripple: loongarch32-linux-gnu
 
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
