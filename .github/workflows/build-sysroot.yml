@@ -10,10 +10,12 @@ jobs:
           - name: Linux RISCV
             base: linux-debian
             arch: riscv64
+            includes: ""
 
           - name: Linux LoongArch64
             base: linux-debian
             arch: loong64
+            includes: sysroot/lib64
 
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
@@ -37,7 +39,7 @@ jobs:
 
       - name: Pack sysroot
         run: |
-          sudo tar -cf sysroot.tar sysroot/usr sysroot/bin sysroot/lib sysroot/sbin sysroot/lib64
+          sudo tar -cf sysroot.tar sysroot/usr sysroot/bin sysroot/lib sysroot/sbin ${{ matrix.includes }}
 
       - name: Upload sysroot
         uses: actions/upload-artifact@v4
