@@ -33,7 +33,7 @@ jobs:
           sudo debootstrap --arch=${{ matrix.arch }} --foreign unstable sysroot https://deb.debian.org/debian
           sudo chroot sysroot /debootstrap/debootstrap --second-stage
           sudo chroot sysroot apt update
-          sudo chroot sysroot apt install -y libc6-dev libc++-dev libc++abi-dev libgcc-s1
+          sudo chroot sysroot apt install -y libc6-dev libc++-dev libc++abi-dev libgcc-s1 libx11-dev libwayland-dev
 
       - name: Pack sysroot
         run: |
