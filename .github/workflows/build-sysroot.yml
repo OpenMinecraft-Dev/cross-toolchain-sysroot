@@ -17,7 +17,7 @@ jobs:
             base: linux-debian
             arch: loong64
             includes: sysroot/lib64
-            tipple: loongarch64-linux-gnu
+            tripple: loongarch64-linux-gnu
 
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
