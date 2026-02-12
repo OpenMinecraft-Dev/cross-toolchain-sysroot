@@ -22,13 +22,13 @@ jobs:
           - name: Linux PowerPC64
             base: linux-debian
             arch: ppc64el
-            includes: ""
+            includes: sysroot/lib64
             tripple: ppc64-linux-gnu
 
           - name: Linux S390X
             base: linux-debian
             arch: s390x
-            includes: ""
+            includes: sysroot/lib64
             tripple: systemz-linux-gnu
 
     name: Build ${{ matrix.name }} sysroot
