@@ -27,7 +27,7 @@ jobs:
 
           - name: Linux Sparc64
             base: linux-debian
-            arch: sparc64
+            arch: sparc
             includes: ""
             tripple: sparcv9-linux-gnu
 
