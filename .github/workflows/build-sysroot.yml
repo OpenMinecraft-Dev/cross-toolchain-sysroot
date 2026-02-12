@@ -58,8 +58,10 @@ jobs:
           rm -rf cross-toolchain-sysroot
           echo ${{ matrix.tripple }} > ./bin/target-tripple
 
+          sudo tar -cf toolchain.tar bin sysroot/usr sysroot/bin sysroot/lib sysroot/sbin ${{ matrix.includes }}
+
       - name: Upload toolchain
         uses: actions/upload-artifact@v4
         with:
           name: llvm-toolchain-${{ matrix.base }}-${{ matrix.arch }}
-          path: .
+          path: toolchain.tar
