@@ -11,6 +11,10 @@ jobs:
             base: linux-debian
             arch: riscv64
 
+          - name: Linux LoongArch64
+            base: linux-debian
+            arch: loong64
+
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
     steps:
@@ -33,7 +37,7 @@ jobs:
 
       - name: Pack sysroot
         run: |
-          sudo tar -cf sysroot.tar --exclude=sysroot/run --exclude=sysroot/media sysroot
+          sudo tar -cf sysroot.tar sysroot/usr sysroot/bin sysroot/lib sysroot/sbin
 
       - name: Upload sysroot
         uses: actions/upload-artifact@v4
