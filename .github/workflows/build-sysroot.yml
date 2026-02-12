@@ -33,7 +33,7 @@ jobs:
 
       - name: Pack sysroot
         run: |
-          tar -cf sysroot.tar --exclude=sysroot/run --exclude=sysroot/media sysroot
+          sudo tar -cf sysroot.tar --exclude=sysroot/run --exclude=sysroot/media sysroot
 
       - name: Upload sysroot
         uses: actions/upload-artifact@v4
