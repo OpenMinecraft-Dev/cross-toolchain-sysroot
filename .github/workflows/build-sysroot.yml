@@ -25,11 +25,11 @@ jobs:
             includes: ""
             tripple: ppc64-linux-gnu
 
-          - name: Linux LoongArch32
+          - name: Linux S390X
             base: linux-debian
-            arch: loong32
+            arch: s390x
             includes: ""
-            tripple: loongarch32-linux-gnu
+            tripple: systemz-linux-gnu
 
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
