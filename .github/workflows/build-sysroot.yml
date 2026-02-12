@@ -19,11 +19,17 @@ jobs:
             includes: sysroot/lib64
             tripple: loongarch64-linux-gnu
 
-          - name: Linux PowerPC
+          - name: Linux PowerPC64
             base: linux-debian
             arch: ppc64el
             includes: ""
             tripple: ppc64-linux-gnu
+
+          - name: Linux Sparc64
+            base: linux-debian
+            arch: sparc64
+            includes: ""
+            tripple: sparcv9-linux-gnu
 
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
