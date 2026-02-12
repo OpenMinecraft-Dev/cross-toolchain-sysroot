@@ -19,6 +19,12 @@ jobs:
             includes: sysroot/lib64
             tripple: loongarch64-linux-gnu
 
+          - name: Linux PowerPC
+            base: linux-debian
+            arch: ppc64le
+            includes: ""
+            tripple: ppc64le-linux-gnu
+
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
     steps:
