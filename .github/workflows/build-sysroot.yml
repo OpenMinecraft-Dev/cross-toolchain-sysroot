@@ -39,6 +39,22 @@ jobs:
             version: "13.0"
             tripple: x86_64-unknown-freebsd13.0
 
+          - name: FreeBSD AArch64
+            base: FreeBSD
+            arch: arm64
+            subarch: aarch64
+            includes: ""
+            version: "13.0"
+            tripple: aarch64-unknown-freebsd13.0
+          
+          - name: FreeBSD RISCV
+            base: FreeBSD
+            arch: riscv
+            subarch: riscv64
+            includes: ""
+            version: "13.0"
+            tripple: riscv64-unknown-freebsd13.0
+
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
     steps:
