@@ -163,7 +163,6 @@ jobs:
 
       - name: Pack toolchain
         run: |
-          rm sysroot.tar
           git clone https://github.com/OpenMinecraft-Dev/cross-toolchain-sysroot
           mkdir bin
           cp cross-toolchain-sysroot/llvm-shell/* ./bin
