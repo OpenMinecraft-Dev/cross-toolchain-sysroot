@@ -1,4 +1,4 @@
-name: Build sysroot
+name: Build LLVM Toolchain
 on: push
 
 jobs:
@@ -125,7 +125,7 @@ jobs:
             tripple: riscv64-unknown-openbsd
             loaderarch: riscv64
 
-    name: Build ${{ matrix.name }} sysroot
+    name: Build for ${{ matrix.name }}
     runs-on: ubuntu-latest
     steps:
       - name: Update system packages
@@ -160,16 +160,6 @@ jobs:
           mkdir sysroot
           tar -xzf base${{ matrix.version2 }}.tgz -C ./sysroot/
           tar -xzf comp${{ matrix.version2 }}.tgz -C ./sysroot/
-
-      - name: Pack sysroot
-        run: |
-          sudo tar -cf sysroot.tar sysroot/usr sysroot/bin sysroot/sbin ${{ matrix.includes }}
-
-      - name: Upload sysroot
-        uses: actions/upload-artifact@v4
-        with:
-          name: sysroot-${{ matrix.base }}-${{ matrix.loaderarch }}
-          path: sysroot.tar
 
       - name: Pack toolchain
         run: |
