@@ -24,7 +24,7 @@ jobs:
             arch: ppc64el
             includes: sysroot/lib64
             tripple: ppc64le-linux-gnu
-            debextra: gcc-multilib
+            debextra: libc6-dev-ppc64
 
           - name: Linux S390X
             base: linux-debian
