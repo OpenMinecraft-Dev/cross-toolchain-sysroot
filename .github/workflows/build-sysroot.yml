@@ -23,7 +23,7 @@ jobs:
             base: linux-debian
             arch: ppc64el
             includes: sysroot/lib64
-            tripple: ppc64le-linux-gnu
+            tripple: powerpc64le-linux-gnu
 
           - name: Linux S390X
             base: linux-debian
