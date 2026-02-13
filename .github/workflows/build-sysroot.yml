@@ -74,7 +74,7 @@ jobs:
           - name: OpenBSD amd64
             base: openbsd
             arch: amd64
-            includes: "sysroot/lib"
+            includes: ""
             version: "7.8"
             version2: "78"
             tripple: x86_64-unknown-openbsd
