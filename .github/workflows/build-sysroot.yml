@@ -10,32 +10,32 @@ jobs:
           - name: Linux RISCV
             base: linux-debian
             arch: riscv64
-            includes: ""
+            includes: "sysroot/lib"
             tripple: riscv64-linux-gnu
 
           - name: Linux LoongArch64
             base: linux-debian
             arch: loong64
-            includes: sysroot/lib64
+            includes: "sysroot/lib sysroot/lib64"
             tripple: loongarch64-linux-gnu
 
           - name: Linux PowerPC64
             base: linux-debian
             arch: ppc64el
-            includes: sysroot/lib64
+            includes: "sysroot/lib sysroot/lib64"
             tripple: powerpc64le-linux-gnu
 
           - name: Linux S390X
             base: linux-debian
             arch: s390x
-            includes: ""
+            includes: "sysroot/lib"
             tripple: systemz-linux-gnu
 
           - name: FreeBSD x86_64
             base: freebsd
             arch: amd64
             subarch: amd64
-            includes: ""
+            includes: "sysroot/lib"
             version: "13.0"
             tripple: x86_64-unknown-freebsd13.0
 
@@ -43,7 +43,7 @@ jobs:
             base: freebsd
             arch: arm64
             subarch: aarch64
-            includes: ""
+            includes: "sysroot/lib"
             version: "13.0"
             tripple: aarch64-unknown-freebsd13.0
           
@@ -51,7 +51,7 @@ jobs:
             base: freebsd
             arch: riscv
             subarch: riscv64
-            includes: ""
+            includes: "sysroot/lib"
             version: "13.0"
             tripple: riscv64-unknown-freebsd13.0
 
@@ -59,7 +59,7 @@ jobs:
             base: freebsd
             arch: powerpc
             subarch: powerpc64le
-            includes: ""
+            includes: "sysroot/lib"
             version: "13.0"
             tripple: powerpc64le-unknown-freebsd13.0
 
@@ -67,14 +67,14 @@ jobs:
             base: freebsd
             arch: i386
             subarch: i386
-            includes: ""
+            includes: "sysroot/lib"
             version: "13.0"
             tripple: i386-unknown-freebsd13.0
 
           - name: OpenBSD amd64
             base: openbsd
             arch: amd64
-            includes: ""
+            includes: "sysroot/lib"
             version: "7.8"
             version2: "78"
             tripple: x86_64-unknown-openbsd
@@ -117,7 +117,7 @@ jobs:
 
       - name: Pack sysroot
         run: |
-          sudo tar -cf sysroot.tar sysroot/usr sysroot/bin sysroot/lib sysroot/sbin ${{ matrix.includes }}
+          sudo tar -cf sysroot.tar sysroot/usr sysroot/bin sysroot/sbin ${{ matrix.includes }}
 
       - name: Upload sysroot
         uses: actions/upload-artifact@v4
@@ -134,7 +134,7 @@ jobs:
           rm -rf cross-toolchain-sysroot
           echo ${{ matrix.tripple }} > ./bin/target-tripple
 
-          sudo tar -cf toolchain.tar bin sysroot/usr sysroot/bin sysroot/lib sysroot/sbin ${{ matrix.includes }}
+          sudo tar -cf toolchain.tar bin sysroot/usr sysroot/bin sysroot/sbin ${{ matrix.includes }}
 
       - name: Upload toolchain
         uses: actions/upload-artifact@v4
