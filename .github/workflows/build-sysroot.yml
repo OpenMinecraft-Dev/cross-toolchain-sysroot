@@ -77,3 +77,10 @@ jobs:
         with:
           name: llvm-toolchain-${{ matrix.base }}-${{ matrix.arch }}
           path: toolchain.tar
+
+      - name: Test toolchain
+        run: |
+          echo "#include <stdio.h>" >> main.c
+          echo "int main() {printf(\"Hello, world\");}" >> main.c
+          ./bin/clang main.c -o main-c
+          file main-c
