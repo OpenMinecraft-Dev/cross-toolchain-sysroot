@@ -32,7 +32,7 @@ jobs:
             tripple: systemz-linux-gnu
 
           - name: FreeBSD x86_64
-            base: FreeBSD
+            base: freebsd
             arch: amd64
             subarch: amd64
             includes: ""
@@ -40,7 +40,7 @@ jobs:
             tripple: x86_64-unknown-freebsd13.0
 
           - name: FreeBSD AArch64
-            base: FreeBSD
+            base: freebsd
             arch: arm64
             subarch: aarch64
             includes: ""
@@ -48,7 +48,7 @@ jobs:
             tripple: aarch64-unknown-freebsd13.0
           
           - name: FreeBSD RISCV
-            base: FreeBSD
+            base: freebsd
             arch: riscv
             subarch: riscv64
             includes: ""
@@ -56,7 +56,7 @@ jobs:
             tripple: riscv64-unknown-freebsd13.0
 
           - name: FreeBSD PowerPC64
-            base: FreeBSD
+            base: freebsd
             arch: powerpc
             subarch: powerpc64le
             includes: ""
@@ -64,12 +64,20 @@ jobs:
             tripple: powerpc64le-unknown-freebsd13.0
 
           - name: FreeBSD I386
-            base: FreeBSD
+            base: freebsd
             arch: i386
             subarch: i386
             includes: ""
             version: "13.0"
             tripple: i386-unknown-freebsd13.0
+
+          - name: OpenBSD amd64
+            base: openbsd
+            arch: amd64
+            includes: ""
+            version: "7.8"
+            version2: "78"
+            tripple: x86_64-unknown-openbsd
 
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
@@ -97,6 +105,15 @@ jobs:
           wget http://ftp-archive.freebsd.org/pub/FreeBSD-Archive/old-releases/${{ matrix.arch }}/${{ matrix.subarch }}/${{ matrix.version }}-RELEASE/base.txz
           mkdir sysroot
           tar -xJf base.txz -C ./sysroot/
+
+      - name: Download OpenBSD root
+        if: matrix.base == 'openbsd'
+        run: |
+          wget https://cdn.openbsd.org/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/base${{ matrix.version2 }}.tgz
+          wget https://cdn.openbsd.org/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/comp{{ matrix.version2 }}.tgz
+          mkdir sysroot
+          tar -xzf base${{ matrix.version2 }}.tgz -C ./sysroot/
+          tar -xzf comp${{ matrix.version2 }}.tgz -C ./sysroot/
 
       - name: Pack sysroot
         run: |
