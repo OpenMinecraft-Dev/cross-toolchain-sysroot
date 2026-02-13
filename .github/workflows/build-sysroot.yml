@@ -12,24 +12,28 @@ jobs:
             arch: riscv64
             includes: "sysroot/lib"
             tripple: riscv64-linux-gnu
+            loaderarch: riscv64
 
           - name: Linux LoongArch64
             base: linux-debian
             arch: loong64
             includes: "sysroot/lib sysroot/lib64"
             tripple: loongarch64-linux-gnu
+            loaderarch: loong64
 
           - name: Linux PowerPC64
             base: linux-debian
             arch: ppc64el
             includes: "sysroot/lib sysroot/lib64"
             tripple: powerpc64le-linux-gnu
+            loaderarch: ppc64
 
           - name: Linux S390X
             base: linux-debian
             arch: s390x
             includes: "sysroot/lib"
             tripple: systemz-linux-gnu
+            loaderarch: s390x
 
           - name: FreeBSD x86_64
             base: freebsd
@@ -38,6 +42,7 @@ jobs:
             includes: "sysroot/lib"
             version: "13.0"
             tripple: x86_64-unknown-freebsd13.0
+            loaderarch: x86_64
 
           - name: FreeBSD AArch64
             base: freebsd
@@ -46,6 +51,7 @@ jobs:
             includes: "sysroot/lib"
             version: "13.0"
             tripple: aarch64-unknown-freebsd13.0
+            loaderarch: arm64
           
           - name: FreeBSD RISCV
             base: freebsd
@@ -54,6 +60,7 @@ jobs:
             includes: "sysroot/lib"
             version: "13.0"
             tripple: riscv64-unknown-freebsd13.0
+            loaderarch: riscv64
 
           - name: FreeBSD PowerPC64
             base: freebsd
@@ -62,6 +69,7 @@ jobs:
             includes: "sysroot/lib"
             version: "13.0"
             tripple: powerpc64le-unknown-freebsd13.0
+            loaderarch: ppc64
 
           - name: FreeBSD I386
             base: freebsd
@@ -70,6 +78,7 @@ jobs:
             includes: "sysroot/lib"
             version: "13.0"
             tripple: i386-unknown-freebsd13.0
+            loaderarch: x86
 
           - name: OpenBSD amd64
             base: openbsd
@@ -78,6 +87,7 @@ jobs:
             version: "7.8"
             version2: "78"
             tripple: x86_64-unknown-openbsd
+            loaderarch: x86_64
 
           - name: OpenBSD arm64
             base: openbsd
@@ -86,6 +96,7 @@ jobs:
             version: "7.8"
             version2: "78"
             tripple: arm64-unknown-openbsd
+            loaderarch: arm64
 
           - name: OpenBSD armv7
             base: openbsd
@@ -94,6 +105,7 @@ jobs:
             version: "7.8"
             version2: "78"
             tripple: armv7-unknown-openbsd
+            loaderarch: armv7
 
           - name: OpenBSD I386
             base: openbsd
@@ -102,6 +114,7 @@ jobs:
             version: "7.8"
             version2: "78"
             tripple: i386-unknown-openbsd
+            loaderarch: x86
 
           - name: OpenBSD RISCV
             base: openbsd
@@ -110,6 +123,7 @@ jobs:
             version: "7.8"
             version2: "78"
             tripple: riscv64-unknown-openbsd
+            loaderarch: riscv64
 
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
@@ -154,7 +168,7 @@ jobs:
       - name: Upload sysroot
         uses: actions/upload-artifact@v4
         with:
-          name: sysroot-${{ matrix.base }}-${{ matrix.arch }}
+          name: sysroot-${{ matrix.base }}-${{ matrix.loaderarch }}
           path: sysroot.tar
 
       - name: Pack toolchain
@@ -171,7 +185,7 @@ jobs:
       - name: Upload toolchain
         uses: actions/upload-artifact@v4
         with:
-          name: llvm-toolchain-${{ matrix.base }}-${{ matrix.arch }}
+          name: llvm-toolchain-${{ matrix.base }}-${{ matrix.loaderarch }}
           path: toolchain.tar
 
       - name: Test toolchain
