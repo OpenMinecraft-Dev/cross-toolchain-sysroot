@@ -23,7 +23,8 @@ jobs:
             base: linux-debian
             arch: ppc64el
             includes: sysroot/lib64
-            tripple: ppc64-linux-gnu
+            tripple: ppc64le-linux-gnu
+            debextra: gcc-multilib
 
           - name: Linux S390X
             base: linux-debian
@@ -49,7 +50,7 @@ jobs:
           sudo debootstrap --arch=${{ matrix.arch }} --foreign unstable sysroot https://deb.debian.org/debian
           sudo chroot sysroot /debootstrap/debootstrap --second-stage
           sudo chroot sysroot apt update
-          sudo chroot sysroot apt install -y gcc libc6-dev libstdc++-15-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev
+          sudo chroot sysroot apt install -y gcc libc6-dev libstdc++-15-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev ${{ matrix.debextra }}
 
       - name: Pack sysroot
         run: |
