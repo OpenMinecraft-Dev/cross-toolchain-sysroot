@@ -89,7 +89,7 @@ jobs:
 
           - name: OpenBSD armv7
             base: openbsd
-            arch: arm64
+            arch: armv7
             includes: ""
             version: "7.8"
             version2: "78"
@@ -102,22 +102,6 @@ jobs:
             version: "7.8"
             version2: "78"
             tripple: i386-unknown-openbsd
-
-          - name: OpenBSD loongson
-            base: openbsd
-            arch: loongson
-            includes: ""
-            version: "7.8"
-            version2: "78"
-            tripple: loongarch64-unknown-openbsd
-
-          - name: OpenBSD PowerPC64
-            base: openbsd
-            arch: powerpc64
-            includes: ""
-            version: "7.8"
-            version2: "78"
-            tripple: powerpc64le-unknown-openbsd
 
           - name: OpenBSD RISCV
             base: openbsd
