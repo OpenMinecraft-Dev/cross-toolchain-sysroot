@@ -80,7 +80,6 @@ jobs:
 
       - name: Test toolchain
         run: |
-          ls sysroot/usr/include/bits
           echo "#include <stdio.h>" >> main.c
           echo "int main() {printf(\"Hello, world\");}" >> main.c
           ./bin/clang main.c -o main-c
