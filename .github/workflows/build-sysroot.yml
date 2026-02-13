@@ -31,6 +31,14 @@ jobs:
             includes: ""
             tripple: systemz-linux-gnu
 
+          - name: FreeBSD x86_64
+            base: FreeBSD
+            arch: amd64
+            subarch: amd64
+            includes: ""
+            version: 13.0
+            tripple: x86_64-unknown-freebsd13.0
+
     name: Build ${{ matrix.name }} sysroot
     runs-on: ubuntu-latest
     steps:
@@ -50,6 +58,13 @@ jobs:
           sudo chroot sysroot /debootstrap/debootstrap --second-stage
           sudo chroot sysroot apt update
           sudo chroot sysroot apt install -y gcc libc6-dev libstdc++-15-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev ${{ matrix.debextra }}
+
+      - name: Download FreeBSD root
+        if: matrix.base == 'freebsd'
+        run: |
+          wget http://ftp-archive.freebsd.org/pub/FreeBSD-Archive/old-releases/${{ matrix.arch }}/${{ matrix.subarch }}/${{ matrix.version }}-RELEASE/base.txz
+          mkdir sysroot
+          tar -xJf base.txz -C ./sysroot/
 
       - name: Pack sysroot
         run: |
