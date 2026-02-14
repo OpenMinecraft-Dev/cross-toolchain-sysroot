@@ -127,6 +127,8 @@ jobs:
 
     name: Build for ${{ matrix.name }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Update system packages
         run: sudo apt update
@@ -184,18 +186,6 @@ jobs:
           ./bin/clang main.c -o main-c
           file main-c
 
-  release:
-    name: Release toolchains
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      contents: write
-    steps:
-      - name: Download toolchains
-        uses: actions/download-artifact@v4
-        if: github.ref_type == 'tag'
-      - name: Check Toolchain
-        run: ls
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
