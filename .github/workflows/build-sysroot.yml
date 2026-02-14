@@ -199,6 +199,6 @@ jobs:
           name: "Toolchain autorelease ${{ github.sha }}"
           draft: false
           prerelease: false
-          files: *.tar.xz
+          files: "*.tar.xz"
           env:
             GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
