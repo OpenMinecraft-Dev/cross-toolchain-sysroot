@@ -194,6 +194,8 @@ jobs:
       - name: Download toolchains
         uses: actions/download-artifact@v4
         if: github.ref_type == 'tag'
+      - name: Check Toolchain
+        run: ls
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
