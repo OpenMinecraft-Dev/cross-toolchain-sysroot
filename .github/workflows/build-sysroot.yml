@@ -193,8 +193,10 @@ jobs:
     steps:
       - name: Download toolchains
         uses: actions/download-artifact@v4
+        if: github.ref_type == 'tag'
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
         with:
           name: "Toolchain autorelease ${{ github.sha }}"
           draft: false
