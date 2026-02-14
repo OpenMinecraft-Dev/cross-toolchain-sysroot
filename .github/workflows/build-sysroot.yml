@@ -40,8 +40,8 @@ jobs:
             arch: amd64
             subarch: amd64
             includes: "sysroot/lib"
-            version: "13.0"
-            tripple: x86_64-unknown-freebsd13.0
+            version: "15.0"
+            tripple: x86_64-unknown-freebsd15.0
             loaderarch: x86_64
 
           - name: FreeBSD AArch64
@@ -49,8 +49,8 @@ jobs:
             arch: arm64
             subarch: aarch64
             includes: "sysroot/lib"
-            version: "13.0"
-            tripple: aarch64-unknown-freebsd13.0
+            version: "15.0"
+            tripple: aarch64-unknown-freebsd15.0
             loaderarch: arm64
           
           - name: FreeBSD RISCV
@@ -58,8 +58,8 @@ jobs:
             arch: riscv
             subarch: riscv64
             includes: "sysroot/lib"
-            version: "13.0"
-            tripple: riscv64-unknown-freebsd13.0
+            version: "15.0"
+            tripple: riscv64-unknown-freebsd15.0
             loaderarch: riscv64
 
           - name: FreeBSD PowerPC64
@@ -67,8 +67,8 @@ jobs:
             arch: powerpc
             subarch: powerpc64le
             includes: "sysroot/lib"
-            version: "13.0"
-            tripple: powerpc64le-unknown-freebsd13.0
+            version: "15.0"
+            tripple: powerpc64le-unknown-freebsd15.0
             loaderarch: ppc64
 
           - name: FreeBSD I386
@@ -76,8 +76,8 @@ jobs:
             arch: i386
             subarch: i386
             includes: "sysroot/lib"
-            version: "13.0"
-            tripple: i386-unknown-freebsd13.0
+            version: "14.3"
+            tripple: i386-unknown-freebsd14.3
             loaderarch: x86
 
           - name: OpenBSD amd64
