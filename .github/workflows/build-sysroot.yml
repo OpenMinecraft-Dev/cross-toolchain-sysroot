@@ -169,13 +169,13 @@ jobs:
           rm -rf cross-toolchain-sysroot
           echo ${{ matrix.tripple }} > ./bin/target-tripple
 
-          sudo tar -cf toolchain.tar bin sysroot/usr sysroot/bin sysroot/sbin ${{ matrix.includes }}
+          sudo tar -cJf llvm-toolchain-${{ matrix.base }}-${{ matrix.loaderarch }}.tar.xz bin sysroot/usr sysroot/bin sysroot/sbin ${{ matrix.includes }}
 
       - name: Upload toolchain
         uses: actions/upload-artifact@v4
         with:
           name: llvm-toolchain-${{ matrix.base }}-${{ matrix.loaderarch }}
-          path: toolchain.tar
+          path: llvm-toolchain-${{ matrix.base }}-${{ matrix.loaderarch }}.tar.xz
 
       - name: Test toolchain
         run: |
@@ -183,3 +183,22 @@ jobs:
           echo "int main() {printf(\"Hello, world\");}" >> main.c
           ./bin/clang main.c -o main-c
           file main-c
+
+  release:
+    name: Release toolchains
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+    steps:
+      - name: Download toolchains
+        uses: actions/download-artifact@v4
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Toolchain autorelease ${{ github.sha }}"
+          draft: false
+          prerelease: false
+          files: *.tar.xz
+          env:
+            GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
