@@ -162,6 +162,7 @@ jobs:
           mkdir sysroot
           tar -xzf base${{ matrix.version2 }}.tgz -C ./sysroot/
           tar -xzf comp${{ matrix.version2 }}.tgz -C ./sysroot/
+          rm sysroot/usr/lib/libc++abi.a
 
       - name: Pack toolchain
         run: |
