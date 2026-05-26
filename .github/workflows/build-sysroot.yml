@@ -28,12 +28,12 @@ jobs:
             tripple: powerpc64le-linux-gnu
             loaderarch: ppc64
 
-          # - name: Linux S390X
-          #   base: linux-debian
-          #   arch: s390x
-          #   includes: "sysroot/lib"
-          #   tripple: systemz-linux-gnu
-          #   loaderarch: s390x
+          - name: Linux S390X
+            base: linux-debian
+            arch: s390x
+            includes: "sysroot/lib"
+            tripple: systemz-linux-gnu
+            loaderarch: s390x
 
           - name: FreeBSD x86_64
             base: freebsd
