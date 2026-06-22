@@ -13,6 +13,7 @@ jobs:
             includes: "sysroot/lib"
             tripple: riscv64-linux-gnu
             loaderarch: riscv64
+            version: trixie
 
           - name: Linux LoongArch64
             base: linux-debian
@@ -20,6 +21,7 @@ jobs:
             includes: "sysroot/lib sysroot/lib64"
             tripple: loongarch64-linux-gnu
             loaderarch: loong64
+            version: unstable
 
           - name: Linux PowerPC64
             base: linux-debian
@@ -27,6 +29,7 @@ jobs:
             includes: "sysroot/lib sysroot/lib64"
             tripple: powerpc64le-linux-gnu
             loaderarch: ppc64
+            version: trixie
 
           - name: Linux S390X
             base: linux-debian
@@ -34,6 +37,7 @@ jobs:
             includes: "sysroot/lib"
             tripple: systemz-linux-gnu
             loaderarch: s390x
+            version: trixie
 
           - name: FreeBSD x86_64
             base: freebsd
@@ -142,10 +146,10 @@ jobs:
         run: |
           sudo apt install qemu-user-static
           mkdir sysroot
-          sudo debootstrap --arch=${{ matrix.arch }} --foreign trixie sysroot https://deb.debian.org/debian
+          sudo debootstrap --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://deb.debian.org/debian
           sudo chroot sysroot /debootstrap/debootstrap --second-stage
           sudo chroot sysroot apt update
-          sudo chroot sysroot apt install -y gcc libc6-dev libstdc++-15-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev ${{ matrix.debextra }}
+          sudo chroot sysroot apt install -y gcc libc6-dev libstdc++-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev ${{ matrix.debextra }}
 
       - name: Download FreeBSD root
         if: matrix.base == 'freebsd'
