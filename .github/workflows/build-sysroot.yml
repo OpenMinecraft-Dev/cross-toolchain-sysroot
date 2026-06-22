@@ -146,10 +146,10 @@ jobs:
         run: |
           sudo apt install qemu-user-static
           mkdir sysroot
-          sudo debootstrap --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://deb.debian.org/debian
+          sudo debootstrap --include=gcc,libc6-dev,libstdc++14-dev,libgcc-s1,libx11-dev,libwayland-dev,libjack-dev,libpulse-dev,libsndio-dev,libthai-dev,libdrm-dev,libgbm-dev,libffi-dev --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://deb.debian.org/debian
           # sudo chroot sysroot /debootstrap/debootstrap --second-stage
-          sudo chroot sysroot apt update
-          sudo chroot sysroot apt install -y gcc libc6-dev libstdc++14-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev ${{ matrix.debextra }}
+          # sudo chroot sysroot apt update
+          # sudo chroot sysroot apt install -y gcc libc6-dev libstdc++14-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev ${{ matrix.debextra }}
 
       - name: Download FreeBSD root
         if: matrix.base == 'freebsd'
