@@ -7,14 +7,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Linux I386
-            base: linux-debian
-            arch: i386
-            includes: "sysroot/lib"
-            tripple: i386-linuu-gnu
-            loaderarch: i386
-            version: unstable
-
           - name: Linux RISCV
             base: linux-debian
             arch: riscv64
