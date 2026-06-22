@@ -7,6 +7,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - name: Linux I386
+            base: linux-debian
+            arch: i386
+            includes: "sysroot/lib"
+            tripple: i386-linuu-gnu
+            loaderarch: i386
+            version: unstable
+
           - name: Linux RISCV
             base: linux-debian
             arch: riscv64
@@ -146,10 +154,7 @@ jobs:
         run: |
           sudo apt install qemu-user-static
           mkdir sysroot
-          sudo debootstrap --include=gcc,libc6-dev,libc++-dev,libgcc-s1,libx11-dev,libwayland-dev,libjack-dev,libpulse-dev,libsndio-dev,libthai-dev,libdrm-dev,libgbm-dev,libffi-dev --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://deb.debian.org/debian
-          # sudo chroot sysroot /debootstrap/debootstrap --second-stage
-          # sudo chroot sysroot apt update
-          # sudo chroot sysroot apt install -y gcc libc6-dev libc++-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev ${{ matrix.debextra }}
+          sudo debootstrap --include=gcc,libc6-dev,libc++-dev,libgcc-s1,libx11-dev,libwayland-dev,libjack-dev,libpulse-dev,libsndio-dev,libthai-dev,libdrm-dev,libgbm-dev,libffi-dev --arch=${{ matrix.arch }} ${{ matrix.version }} sysroot https://deb.debian.org/debian
 
       - name: Download FreeBSD root
         if: matrix.base == 'freebsd'
@@ -179,7 +184,7 @@ jobs:
           sudo tar -cJf llvm-toolchain-${{ matrix.base }}-${{ matrix.loaderarch }}.tar.xz bin sysroot/usr sysroot/bin sysroot/sbin ${{ matrix.includes }}
 
       - name: Upload toolchain
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: llvm-toolchain-${{ matrix.base }}-${{ matrix.loaderarch }}
           path: llvm-toolchain-${{ matrix.base }}-${{ matrix.loaderarch }}.tar.xz
