@@ -87,50 +87,50 @@ jobs:
             tripple: i386-unknown-freebsd14.3
             loaderarch: x86
 
-          - name: OpenBSD amd64
-            base: openbsd
-            arch: amd64
-            includes: ""
-            version: "7.8"
-            version2: "78"
-            tripple: x86_64-unknown-openbsd
-            loaderarch: x86_64
+          # - name: OpenBSD amd64
+          #   base: openbsd
+          #   arch: amd64
+          #   includes: ""
+          #   version: "7.8"
+          #   version2: "78"
+          #   tripple: x86_64-unknown-openbsd
+          #   loaderarch: x86_64
 
-          - name: OpenBSD arm64
-            base: openbsd
-            arch: arm64
-            includes: ""
-            version: "7.8"
-            version2: "78"
-            tripple: arm64-unknown-openbsd
-            loaderarch: arm64
+          # - name: OpenBSD arm64
+          #   base: openbsd
+          #   arch: arm64
+          #   includes: ""
+          #   version: "7.8"
+          #   version2: "78"
+          #   tripple: arm64-unknown-openbsd
+          #   loaderarch: arm64
 
-          - name: OpenBSD armv7
-            base: openbsd
-            arch: armv7
-            includes: ""
-            version: "7.8"
-            version2: "78"
-            tripple: armv7-unknown-openbsd
-            loaderarch: armv7
+          # - name: OpenBSD armv7
+          #   base: openbsd
+          #   arch: armv7
+          #   includes: ""
+          #   version: "7.8"
+          #   version2: "78"
+          #   tripple: armv7-unknown-openbsd
+          #   loaderarch: armv7
 
-          - name: OpenBSD I386
-            base: openbsd
-            arch: i386
-            includes: ""
-            version: "7.8"
-            version2: "78"
-            tripple: i386-unknown-openbsd
-            loaderarch: x86
+          # - name: OpenBSD I386
+          #   base: openbsd
+          #   arch: i386
+          #   includes: ""
+          #   version: "7.8"
+          #   version2: "78"
+          #   tripple: i386-unknown-openbsd
+          #   loaderarch: x86
 
-          - name: OpenBSD RISCV
-            base: openbsd
-            arch: riscv64
-            includes: ""
-            version: "7.8"
-            version2: "78"
-            tripple: riscv64-unknown-openbsd
-            loaderarch: riscv64
+          # - name: OpenBSD RISCV
+          #   base: openbsd
+          #   arch: riscv64
+          #   includes: ""
+          #   version: "7.8"
+          #   version2: "78"
+          #   tripple: riscv64-unknown-openbsd
+          #   loaderarch: riscv64
 
     name: Build for ${{ matrix.name }}
     runs-on: ubuntu-latest
@@ -164,8 +164,8 @@ jobs:
       - name: Download OpenBSD root
         if: matrix.base == 'openbsd'
         run: |
-          wget https://mirrors.sonic.net/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/base${{ matrix.version2 }}.tgz
-          wget	https://mirrors.sonic.net/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/comp${{ matrix.version2 }}.tgz
+          wget https://mirrors.sr.sonic.net/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/base${{ matrix.version2 }}.tgz
+          wget https://mirrors.sr.sonic.net/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/comp${{ matrix.version2 }}.tgz
           mkdir sysroot
           tar -xzf base${{ matrix.version2 }}.tgz -C ./sysroot/
           tar -xzf comp${{ matrix.version2 }}.tgz -C ./sysroot/
