@@ -1,4 +1,3 @@
 #!/bin/bash
 DIR=$(cd $(dirname $0); pwd)/..
-FLAGS=$(cat $(cd $(dirname $0); pwd)/flags)
-exec /usr/bin/llvm-ar $FLAGS "$@"
+exec /usr/bin/llvm-ar "$@"
