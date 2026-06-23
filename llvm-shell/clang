@@ -1,4 +1,5 @@
 #!/bin/bash
 DIR=$(cd $(dirname $0); pwd)/..
 TRIPPLE=$(cat $(cd $(dirname $0); pwd)/target-tripple)
-exec /usr/bin/clang --target=$TRIPPLE --sysroot=$DIR/sysroot -fuse-ld=lld -Wno-unused-command-line-argument "$@"
+FLAGS=$(cat $(cd $(dirname $0); pwd)/flags)
+exec /usr/bin/clang --target=$TRIPPLE $FLAGS --sysroot=$DIR/sysroot -fuse-ld=lld -Wno-unused-command-line-argument "$@"

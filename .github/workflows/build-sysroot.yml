@@ -14,6 +14,7 @@ jobs:
             tripple: riscv64-linux-gnu
             loaderarch: riscv64
             version: unstable
+            flags: -latomic
 
           - name: Linux LoongArch64
             base: linux-debian
@@ -22,6 +23,7 @@ jobs:
             tripple: loongarch64-linux-gnu
             loaderarch: loong64
             version: unstable
+            flags: -latomic
 
           - name: Linux PowerPC64
             base: linux-debian
@@ -30,6 +32,7 @@ jobs:
             tripple: powerpc64le-linux-gnu
             loaderarch: ppc64
             version: unstable
+            flags: -latomic
 
           - name: Linux S390X
             base: linux-debian
@@ -175,6 +178,7 @@ jobs:
           cp cross-toolchain-sysroot/llvm-shell/* ./bin
           rm -rf cross-toolchain-sysroot
           echo ${{ matrix.tripple }} > ./bin/target-tripple
+          echo ${{ matrix.flags }} > ./bin/flags
 
           sudo tar -cJf llvm-toolchain-${{ matrix.base }}-${{ matrix.loaderarch }}.tar.xz bin sysroot/usr sysroot/bin sysroot/sbin ${{ matrix.includes }}
 
