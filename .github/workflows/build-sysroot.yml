@@ -50,6 +50,14 @@ jobs:
             loaderarch: x86_64
             version: unstable
 
+          - name: Linux AArch64
+            base: linux-debian
+            arch: aarch64
+            includes: "sysroot/lib"
+            tripple: aarch64-linux-gnu
+            loaderarch: arm64
+            version: unstable
+
           - name: FreeBSD x86_64
             base: freebsd
             arch: amd64
