@@ -42,6 +42,14 @@ jobs:
             loaderarch: s390x
             version: unstable
 
+          - name: Linux x86_64
+            base: linux-debian
+            arch: x86_64
+            includes: "sysroot/lib"
+            tripple: x86_64-linux-gnu
+            loaderarch: x86_64
+            version: unstable
+
           - name: FreeBSD x86_64
             base: freebsd
             arch: amd64
