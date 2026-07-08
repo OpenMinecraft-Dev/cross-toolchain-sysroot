@@ -62,7 +62,7 @@ jobs:
             base: linux-debian
             arch: armhf
             includes: "sysroot/lib"
-            tripple: armhf-linux-gnu
+            tripple: arm-linux-gnu
             loaderarch: armv7
             version: unstable
 
