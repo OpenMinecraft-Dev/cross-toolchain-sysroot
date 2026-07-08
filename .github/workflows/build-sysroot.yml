@@ -44,7 +44,7 @@ jobs:
 
           - name: Linux x86_64
             base: linux-debian
-            arch: x86_64
+            arch: amd64
             includes: "sysroot/lib"
             tripple: x86_64-linux-gnu
             loaderarch: x86_64
