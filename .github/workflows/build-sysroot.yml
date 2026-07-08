@@ -58,14 +58,6 @@ jobs:
             loaderarch: arm64
             version: unstable
 
-          - name: Linux Arm
-            base: linux-debian
-            arch: armhf
-            includes: "sysroot/lib"
-            tripple: arm-linux-gnu
-            loaderarch: armv7
-            version: unstable
-
           - name: FreeBSD x86_64
             base: freebsd
             arch: amd64
