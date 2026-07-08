@@ -52,7 +52,7 @@ jobs:
 
           - name: Linux AArch64
             base: linux-debian
-            arch: aarch64
+            arch: arm64
             includes: "sysroot/lib"
             tripple: aarch64-linux-gnu
             loaderarch: arm64
