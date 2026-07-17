@@ -210,6 +210,8 @@ jobs:
           echo "int main() {printf(\"Hello, world\");}" >> main.c
           ./bin/clang main.c -o main-c
           file main-c
+          ./bin/clang main.c -c -o main-c.o
+          file main-c.o
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
