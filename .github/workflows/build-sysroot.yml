@@ -41,6 +41,7 @@ jobs:
             tripple: systemz-linux-gnu
             loaderarch: s390x
             version: unstable
+            flags: -latomic
 
           - name: Linux x86_64
             base: linux-debian
