@@ -13,7 +13,7 @@ jobs:
             includes: "sysroot/lib"
             tripple: riscv64-linux-gnu
             loaderarch: riscv64
-            version: unstable
+            version: trixie
             flags: -latomic
 
           - name: Linux LoongArch64
@@ -22,7 +22,7 @@ jobs:
             includes: "sysroot/lib sysroot/lib64"
             tripple: loongarch64-linux-gnu
             loaderarch: loong64
-            version: unstable
+            version: trixie
             flags: -latomic
 
           - name: Linux PowerPC64
@@ -31,7 +31,7 @@ jobs:
             includes: "sysroot/lib sysroot/lib64"
             tripple: powerpc64le-linux-gnu
             loaderarch: ppc64
-            version: unstable
+            version: trixie
             flags: -latomic
 
           - name: Linux S390X
@@ -40,7 +40,7 @@ jobs:
             includes: "sysroot/lib"
             tripple: s390x-linux-gnu
             loaderarch: s390x
-            version: unstable
+            version: trixie
             flags: -latomic
 
           - name: Linux x86_64
@@ -49,7 +49,7 @@ jobs:
             includes: "sysroot/lib"
             tripple: x86_64-linux-gnu
             loaderarch: x86_64
-            version: unstable
+            version: trixie
 
           - name: Linux AArch64
             base: linux-debian
@@ -57,7 +57,7 @@ jobs:
             includes: "sysroot/lib"
             tripple: aarch64-linux-gnu
             loaderarch: arm64
-            version: unstable
+            version: trixie
 
           - name: FreeBSD x86_64
             base: freebsd
