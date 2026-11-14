@@ -207,6 +207,7 @@ jobs:
 
       - name: Test toolchain
         run: |
+          sudo apt install lld
           ./bin/clang -v -E -x c++ /dev/null 2>&1 | sed -n '/#include <...> search starts here:/,/End of search list/p'
 
           echo "#include <stdio.h>" >> main.cpp
