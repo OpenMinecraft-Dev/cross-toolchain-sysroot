@@ -38,7 +38,7 @@ jobs:
             base: linux-debian
             arch: s390x
             includes: "sysroot/lib"
-            tripple: systemz-linux-gnu
+            tripple: s390x-linux-gnu
             loaderarch: s390x
             version: unstable
             flags: -latomic
