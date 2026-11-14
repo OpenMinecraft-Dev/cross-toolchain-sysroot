@@ -218,7 +218,7 @@ jobs:
 
       - name: Test toolchain
         run: |
-          ls ./sysroot/usr/include/c++
+          ./bin/clang -v -E -x c++ /dev/null 2>&1 | sed -n '/#include <...> search starts here:/,/End of search list/p'
           echo "#include <stdio.h>" >> main.cpp
           echo "#include <string>" >> main.cpp
           echo "int main() {printf(\"Hello, world\");}" >> main.cpp
