@@ -107,7 +107,7 @@ jobs:
           - name: OpenBSD amd64
             base: openbsd
             arch: amd64
-            includes: "sysroot/lib sysroot/lib64"
+            includes: ""
             version: "8.0"
             version2: "80"
             tripple: x86_64-unknown-openbsd
@@ -116,7 +116,7 @@ jobs:
           - name: OpenBSD arm64
             base: openbsd
             arch: arm64
-            includes: "sysroot/lib sysroot/lib64"
+            includes: ""
             version: "8.0"
             version2: "80"
             tripple: arm64-unknown-openbsd
@@ -125,7 +125,7 @@ jobs:
           - name: OpenBSD armv7
             base: openbsd
             arch: armv7
-            includes: "sysroot/lib sysroot/lib64"
+            includes: ""
             version: "8.0"
             version2: "80"
             tripple: armv7-unknown-openbsd
@@ -134,7 +134,7 @@ jobs:
           - name: OpenBSD I386
             base: openbsd
             arch: i386
-            includes: "sysroot/lib sysroot/lib64"
+            includes: ""
             version: "8.0"
             version2: "80"
             tripple: i386-unknown-openbsd
@@ -143,7 +143,7 @@ jobs:
           - name: OpenBSD RISCV
             base: openbsd
             arch: riscv64
-            includes: "sysroot/lib sysroot/lib64"
+            includes: ""
             version: "8.0"
             version2: "80"
             tripple: riscv64-unknown-openbsd
@@ -216,6 +216,7 @@ jobs:
           file main-c
           ./bin/clang main.cpp -c -o main-c.o
           file main-c.o
+          ./bin/lld -o main-c-lld main-c.o -lc++ -lc++abi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
