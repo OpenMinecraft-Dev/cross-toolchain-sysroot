@@ -59,6 +59,15 @@ jobs:
             loaderarch: arm64
             version: unstable
 
+          - name: Linux Sparc64
+            base: linux-debian-port
+            arch: sparc64
+            includes: "sysroot/lib"
+            tripple: sparc64-linux-gnu
+            loaderarch: sparc64
+            version: unstable
+            flags: -latomic
+
           - name: FreeBSD x86_64
             base: freebsd
             arch: amd64
@@ -104,50 +113,50 @@ jobs:
             tripple: i386-unknown-freebsd14.3
             loaderarch: x86
 
-          # - name: OpenBSD amd64
-          #   base: openbsd
-          #   arch: amd64
-          #   includes: ""
-          #   version: "7.8"
-          #   version2: "78"
-          #   tripple: x86_64-unknown-openbsd
-          #   loaderarch: x86_64
+          - name: OpenBSD amd64
+            base: openbsd
+            arch: amd64
+            includes: ""
+            version: "7.8"
+            version2: "78"
+            tripple: x86_64-unknown-openbsd
+            loaderarch: x86_64
 
-          # - name: OpenBSD arm64
-          #   base: openbsd
-          #   arch: arm64
-          #   includes: ""
-          #   version: "7.8"
-          #   version2: "78"
-          #   tripple: arm64-unknown-openbsd
-          #   loaderarch: arm64
+          - name: OpenBSD arm64
+            base: openbsd
+            arch: arm64
+            includes: ""
+            version: "7.8"
+            version2: "78"
+            tripple: arm64-unknown-openbsd
+            loaderarch: arm64
 
-          # - name: OpenBSD armv7
-          #   base: openbsd
-          #   arch: armv7
-          #   includes: ""
-          #   version: "7.8"
-          #   version2: "78"
-          #   tripple: armv7-unknown-openbsd
-          #   loaderarch: armv7
+          - name: OpenBSD armv7
+            base: openbsd
+            arch: armv7
+            includes: ""
+            version: "7.8"
+            version2: "78"
+            tripple: armv7-unknown-openbsd
+            loaderarch: armv7
 
-          # - name: OpenBSD I386
-          #   base: openbsd
-          #   arch: i386
-          #   includes: ""
-          #   version: "7.8"
-          #   version2: "78"
-          #   tripple: i386-unknown-openbsd
-          #   loaderarch: x86
+          - name: OpenBSD I386
+            base: openbsd
+            arch: i386
+            includes: ""
+            version: "7.8"
+            version2: "78"
+            tripple: i386-unknown-openbsd
+            loaderarch: x86
 
-          # - name: OpenBSD RISCV
-          #   base: openbsd
-          #   arch: riscv64
-          #   includes: ""
-          #   version: "7.8"
-          #   version2: "78"
-          #   tripple: riscv64-unknown-openbsd
-          #   loaderarch: riscv64
+          - name: OpenBSD RISCV
+            base: openbsd
+            arch: riscv64
+            includes: ""
+            version: "7.8"
+            version2: "78"
+            tripple: riscv64-unknown-openbsd
+            loaderarch: riscv64
 
     name: Build for ${{ matrix.name }}
     runs-on: ubuntu-latest
@@ -167,6 +176,16 @@ jobs:
           sudo apt install qemu-user-static
           mkdir sysroot
           sudo debootstrap --variant=minbase --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://deb.debian.org/debian
+          sudo chroot sysroot /debootstrap/debootstrap --second-stage
+          sudo chroot sysroot apt update
+          sudo chroot sysroot apt install -y gcc libc6-dev libstdc++-15-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev
+
+      - name: Build Debian port root
+        if: matrix.base == 'linux-debian-port'
+        run: |
+          sudo apt install qemu-user-static
+          mkdir sysroot
+          sudo debootstrap --variant=minbase --extra-suites=unreleased --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://ftp.ports.debian.org/debian-ports/
           sudo chroot sysroot /debootstrap/debootstrap --second-stage
           sudo chroot sysroot apt update
           sudo chroot sysroot apt install -y gcc libc6-dev libstdc++-15-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev
