@@ -217,7 +217,6 @@ jobs:
           file main-c
           ./bin/clang main.cpp -c -o main-c.o
           file main-c.o
-          ./bin/lld -o main-c-lld main-c.o -lc++ -lc++abi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
