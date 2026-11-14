@@ -59,15 +59,6 @@ jobs:
             loaderarch: arm64
             version: unstable
 
-          - name: Linux Sparc64
-            base: linux-debian-port
-            arch: sparc64
-            includes: "sysroot/lib"
-            tripple: sparc64-linux-gnu
-            loaderarch: sparc64
-            version: unstable
-            flags: -latomic
-
           - name: FreeBSD x86_64
             base: freebsd
             arch: amd64
