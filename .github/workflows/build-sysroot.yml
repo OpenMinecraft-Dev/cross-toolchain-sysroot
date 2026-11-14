@@ -213,11 +213,11 @@ jobs:
           echo "#include <stdio.h>" >> main.cpp
           echo "#include <string>" >> main.cpp
           echo "int main() {printf(\"Hello, world\");}" >> main.cpp
-          ./bin/clang main.cpp -o main-c
+          ./bin/clang++ main.cpp -o main-c
           file main-c
-          ./bin/clang main.cpp -c -o main-c.o
+          ./bin/clang++ main.cpp -c -o main-c.o
           file main-c.o
-          ./bin/clang main-c.o -o main-c-link
+          ./bin/clang++ main-c.o -o main-c-link
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
