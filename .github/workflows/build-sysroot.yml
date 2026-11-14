@@ -117,8 +117,8 @@ jobs:
             base: openbsd
             arch: amd64
             includes: ""
-            version: "7.8"
-            version2: "78"
+            version: "8.0"
+            version2: "80"
             tripple: x86_64-unknown-openbsd
             loaderarch: x86_64
 
@@ -126,8 +126,8 @@ jobs:
             base: openbsd
             arch: arm64
             includes: ""
-            version: "7.8"
-            version2: "78"
+            version: "8.0"
+            version2: "80"
             tripple: arm64-unknown-openbsd
             loaderarch: arm64
 
@@ -135,8 +135,8 @@ jobs:
             base: openbsd
             arch: armv7
             includes: ""
-            version: "7.8"
-            version2: "78"
+            version: "8.0"
+            version2: "80"
             tripple: armv7-unknown-openbsd
             loaderarch: armv7
 
@@ -144,8 +144,8 @@ jobs:
             base: openbsd
             arch: i386
             includes: ""
-            version: "7.8"
-            version2: "78"
+            version: "8.0"
+            version2: "80"
             tripple: i386-unknown-openbsd
             loaderarch: x86
 
@@ -153,8 +153,8 @@ jobs:
             base: openbsd
             arch: riscv64
             includes: ""
-            version: "7.8"
-            version2: "78"
+            version: "8.0"
+            version2: "80"
             tripple: riscv64-unknown-openbsd
             loaderarch: riscv64
 
@@ -173,7 +173,7 @@ jobs:
       - name: Build Debian root
         if: matrix.base == 'linux-debian'
         run: |
-          sudo apt install qemu-user-static
+          sudo apt install qemu-user qemu-user-binfmt
           mkdir sysroot
           sudo debootstrap --variant=minbase --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://deb.debian.org/debian
           sudo chroot sysroot /debootstrap/debootstrap --second-stage
@@ -183,7 +183,7 @@ jobs:
       - name: Build Debian port root
         if: matrix.base == 'linux-debian-port'
         run: |
-          sudo apt install qemu-user-static
+          sudo apt install qemu-user qemu-user-binfmt
           mkdir sysroot
           sudo debootstrap --variant=minbase --extra-suites=unreleased --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://ftp.ports.debian.org/debian-ports/
           sudo chroot sysroot /debootstrap/debootstrap --second-stage
@@ -200,7 +200,7 @@ jobs:
       - name: Download OpenBSD root
         if: matrix.base == 'openbsd'
         run: |
-          wget https://mirrors.sr.sonic.net/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/base${{ matrix.version2 }}.tgz
+          wget https://cdn.openbsd.org/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/base${{ matrix.version2 }}.tgz
           wget https://mirrors.sr.sonic.net/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/comp${{ matrix.version2 }}.tgz
           mkdir sysroot
           tar -xzf base${{ matrix.version2 }}.tgz -C ./sysroot/
