@@ -167,7 +167,7 @@ jobs:
         run: sudo apt update
 
       - name: Install Debootstrap
-        if: matrix.base == 'linux-debian'
+        if: matrix.base == 'linux-debian' || matrix.base == 'linux-debian-port'
         run: sudo apt install debootstrap
 
       - name: Build Debian root
@@ -201,7 +201,7 @@ jobs:
         if: matrix.base == 'openbsd'
         run: |
           wget https://cdn.openbsd.org/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/base${{ matrix.version2 }}.tgz
-          wget https://mirrors.sr.sonic.net/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/comp${{ matrix.version2 }}.tgz
+          wget https://cdn.openbsd.org/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/comp${{ matrix.version2 }}.tgz
           mkdir sysroot
           tar -xzf base${{ matrix.version2 }}.tgz -C ./sysroot/
           tar -xzf comp${{ matrix.version2 }}.tgz -C ./sysroot/
