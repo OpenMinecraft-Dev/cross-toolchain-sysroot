@@ -218,6 +218,7 @@ jobs:
 
       - name: Test toolchain
         run: |
+          ls ./sysroot/usr/include/c++
           echo "#include <stdio.h>" >> main.cpp
           echo "#include <string>" >> main.cpp
           echo "int main() {printf(\"Hello, world\");}" >> main.cpp
