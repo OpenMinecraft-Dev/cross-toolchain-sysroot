@@ -1,4 +1,4 @@
 #!/bin/bash
 DIR=$(cd $(dirname $0); pwd)/..
 FLAGS=$(cat $(cd $(dirname $0); pwd)/flags)
-exec /usr/bin/ld.lld $FLAGS --sysroot=$DIR/sysroot "$@"
+exec /usr/bin/ld.lld $FLAGS --sysroot=$DIR/sysroot -L$DIR/sysroot/lib -L$DIR/sysroot/lib64 -L$DIR/sysroot/usr/lib -L$DIR/sysroot/usr/lib64 "$@"
