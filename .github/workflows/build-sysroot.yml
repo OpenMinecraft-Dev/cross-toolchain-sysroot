@@ -169,7 +169,7 @@ jobs:
           sudo debootstrap --variant=minbase --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://deb.debian.org/debian
           sudo chroot sysroot /debootstrap/debootstrap --second-stage
           sudo chroot sysroot apt update
-          sudo chroot sysroot apt install -y gcc-16 libc6-dev libstdc++-16-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev
+          sudo chroot sysroot apt install -y gcc g++ libc6-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev
 
       - name: Download FreeBSD root
         if: matrix.base == 'freebsd'
