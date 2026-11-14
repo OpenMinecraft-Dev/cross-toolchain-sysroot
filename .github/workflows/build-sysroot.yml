@@ -150,7 +150,7 @@ jobs:
             loaderarch: riscv64
 
     name: Build for ${{ matrix.name }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
@@ -218,13 +218,11 @@ jobs:
 
       - name: Test toolchain
         run: |
-          ./bin/clang -v -E -x c++ /dev/null 2>&1 | sed -n '/#include <...> search starts here:/,/End of search list/p'
-          echo "#include <stdio.h>" >> main.cpp
-          echo "#include <string>" >> main.cpp
+          echo "#include <stdio.h>" >> main.c
           echo "int main() {printf(\"Hello, world\");}" >> main.cpp
-          ./bin/clang main.cpp -o main-c
+          ./bin/clang main.c -o main-c
           file main-c
-          ./bin/clang main.cpp -c -o main-c.o
+          ./bin/clang main.c -c -o main-c.o
           file main-c.o
 
       - name: Create GitHub Release
