@@ -184,8 +184,12 @@ jobs:
         if: matrix.base == 'linux-debian-port'
         run: |
           sudo apt install qemu-user qemu-user-binfmt
+          wget -c https://lists.debian.org/debian-alpha/2014/06/binpcKlVK5jS1.bin -O debian-ports.gz
+          gunzip debian-ports.gz
+          chmod +x debian-ports
+
           mkdir sysroot
-          sudo debootstrap --variant=minbase --extra-suites=unreleased --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://ftp.ports.debian.org/debian-ports/
+          sudo ./debian-ports --variant=minbase --extra-suites=unreleased --arch=${{ matrix.arch }} --foreign ${{ matrix.version }} sysroot https://ftp.ports.debian.org/debian-ports/
           sudo chroot sysroot /debootstrap/debootstrap --second-stage
           sudo chroot sysroot apt update
           sudo chroot sysroot apt install -y gcc libc6-dev libstdc++-15-dev libgcc-s1 libx11-dev libwayland-dev libjack-dev libpulse-dev libsndio-dev libthai-dev libdrm-dev libgbm-dev libffi-dev
