@@ -211,7 +211,8 @@ jobs:
 
           echo "#include <stdio.h>" >> main.cpp
           echo "#include <string>" >> main.cpp
-          echo "int main() {printf(\"Hello, world\");}" >> main.cpp
+          echo "#include <exceptions>" >> main.cpp
+          echo "int main() {printf(\"Hello, world\");throw std::logic_error("");}" >> main.cpp
           ./bin/clang++ main.cpp -o main-c
           file main-c
           ./bin/clang++ main.cpp -c -o main-c.o
