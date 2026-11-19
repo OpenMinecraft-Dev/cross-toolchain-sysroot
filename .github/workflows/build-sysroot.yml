@@ -183,9 +183,13 @@ jobs:
         run: |
           wget https://cdn.openbsd.org/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/base${{ matrix.version2 }}.tgz
           wget https://cdn.openbsd.org/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/comp${{ matrix.version2 }}.tgz
+          wget https://cdn.openbsd.org/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/xbase${{ matrix.version2 }}.tgz
+          wget https://cdn.openbsd.org/pub/OpenBSD/${{ matrix.version }}/${{ matrix.arch }}/xshare${{ matrix.version2 }}.tgz
           mkdir sysroot
           tar -xzf base${{ matrix.version2 }}.tgz -C ./sysroot/
           tar -xzf comp${{ matrix.version2 }}.tgz -C ./sysroot/
+          tar -xzf xbase${{ matrix.version2 }}.tgz -C ./sysroot/
+          tar -xzf xshare${{ matrix.version2 }}.tgz -C ./sysroot/
           cd ./sysroot/usr/lib
           python3 -c "import os,re;[os.rename(f,m[1]) for f in os.listdir('.') if not os.path.isdir(f) and (m:=re.match(r'^(lib.*\.so)\..+$',f)) and not os.path.lexists(m[1])]"
           cd ../../..
