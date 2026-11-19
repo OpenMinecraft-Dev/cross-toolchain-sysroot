@@ -186,8 +186,9 @@ jobs:
           mkdir sysroot
           tar -xzf base${{ matrix.version2 }}.tgz -C ./sysroot/
           tar -xzf comp${{ matrix.version2 }}.tgz -C ./sysroot/
-          cp ./sysroot/usr/lib/libc++abi.so.10.0 ./sysroot/usr/lib/libc++abi.so
-          cp ./sysroot/usr/lib/libc++.so.13.0 ./sysroot/usr/lib/libc++.so
+          cd ./sysroot/usr/lib
+          python3 -c "import os,re;[os.rename(f,m[1]) for f in os.listdir('.') if not os.path.isdir(f) and (m:=re.match(r'^(lib.*\.so)\..+$',f)) and not os.path.lexists(m[1])]"
+          cd ../../..
 
       - name: Pack toolchain
         run: |
