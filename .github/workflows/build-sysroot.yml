@@ -186,9 +186,7 @@ jobs:
           mkdir sysroot
           tar -xzf base${{ matrix.version2 }}.tgz -C ./sysroot/
           tar -xzf comp${{ matrix.version2 }}.tgz -C ./sysroot/
-          rm ./sysroot/usr/lib/libc++abi.a
           cp ./sysroot/usr/lib/libc++abi.so.10.0 ./sysroot/usr/lib/libc++abi.so
-          rm ./sysroot/usr/lib/libc++.a
           cp ./sysroot/usr/lib/libc++.so.13.0 ./sysroot/usr/lib/libc++.so
 
       - name: Pack toolchain
